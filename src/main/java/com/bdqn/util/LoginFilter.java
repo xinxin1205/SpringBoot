@@ -1,29 +1,41 @@
 package com.bdqn.util;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.xml.ws.handler.Handler;
+import java.io.PrintWriter;
 
+@CrossOrigin("*")
+@Component
 public class LoginFilter implements HandlerInterceptor {
 
+    @Autowired
+    RedisUtil u;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
-        System.out.println("after...");
-
         //如果有session 则证明可登录
-        HttpSession httpSession=request.getSession();
-        if (httpSession.getAttribute("login")!=null){
-            System.out.println("拦截器判断进入session");
-//            httpSession.setAttribute("无权限","请先登录");
-//            response.sendRedirect("/");
+        String Login = request.getParameter("Login");
+        System.err.println(Login);
+        if (Login != null) {
+            Object o = u.get(Login);
+            if (o != null) {
+                return true;
+            }
         }
-        return true;
+        //给前台一个响应
+        response.setContentType("text/html");
+        response.setCharacterEncoding("utf-8");
+        PrintWriter out = response.getWriter();
+        out.print("nologin");
+        out.flush();
+        out.close();
+        return false;
         /*改为return true则不会被拦截 */
     }
 

@@ -4,14 +4,12 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
+
 @Component
 public class RedisUtil {
-
 
         @Resource
         RedisTemplate<String,Object> redisTemplate;
