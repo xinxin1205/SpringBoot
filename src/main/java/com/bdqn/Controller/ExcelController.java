@@ -23,7 +23,7 @@ public class ExcelController {
     @ResponseBody
     public void getlist(HttpServletResponse response) throws Exception {
 
-
+        response.addHeader("Access-Control-Allow-Origin", "*");
 
         // 列名
         String columnNames[] = {"ID", "酒店名字"};

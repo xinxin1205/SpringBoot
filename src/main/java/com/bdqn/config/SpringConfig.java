@@ -1,6 +1,7 @@
 package com.bdqn.config;
 
 import com.bdqn.util.LoginFilter;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class SpringConfig implements WebMvcConfigurer {
 
+    @Bean
     //怎样把springmvc 这个对象当成组件注入到拦截器中
     public LoginFilter getmvc() {
         return new LoginFilter();
@@ -23,5 +25,11 @@ public class SpringConfig implements WebMvcConfigurer {
         registration.addPathPatterns("/*");//添加选择要拦截的路径
         registration.excludePathPatterns("/Login");//排除要拦截的唯一路径
     }
+
+
+
+
+
+
 
 }
