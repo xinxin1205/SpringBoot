@@ -35,8 +35,6 @@ public class UserController {
         page.setCurPage(index);
         page.setPageCount(count % 5 == 0 ? count / 5 : count / 5 + 1);
         page.setRows(list);
-
-
         return page;
     }
 
@@ -47,6 +45,7 @@ public class UserController {
     @ResponseBody
 
     public Object login(String sea, HttpServletResponse response) {
+
         if (sea.equals("User")) {
             redisUtil.SetValue("User01", "类");
             return "User01";
